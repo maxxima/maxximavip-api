@@ -19,6 +19,7 @@ $router->get('/', function () use ($router) {
 */
 $router->get('hello-world', 'HelloWorldController@helloWorld');
 
+$router->get('v1/health','HealthController@health');
 //affiliate-referral-click routes
 
 $router->post('/api/v1/affiliates-clicks/sessions/{sessionKey}', [
