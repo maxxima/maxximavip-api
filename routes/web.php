@@ -29,7 +29,7 @@ $router->post('/api/v1/affiliate-clicks/sessions/{sessionKey}', [
     'uses'=>'AffiliateReferralClickController@createNewClickV1']);
 
 //affiliate-referral routes
-$router->get('/api/v1/affiliates/{affiliateId}/referral-sessions', [
+$router->get('/api/v1/affiliates/{affiliateId}/referral-sessions/locations/{locationId}', [
     'middleware'=>'apiKeyAuth',
     'uses'=>'AffiliateReferralController@createAffiliateReferralV1']);
 

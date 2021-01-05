@@ -12,4 +12,5 @@ class HttpStatusCodes
     const BAD_REQUEST = 400;
     const OK = 200;
     const TOO_MANY_REQUESTS = 429;
+    const NOT_ACCEPTABLE = 406;
 }

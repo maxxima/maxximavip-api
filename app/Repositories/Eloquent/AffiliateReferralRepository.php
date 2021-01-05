@@ -14,7 +14,7 @@ class AffiliateReferralRepository implements AffiliateReferralRepositoryInterfac
 
     }
 
-    public function createReferral($memberId,$source,$ipAddress){
+    public function createReferral(string $memberId,int $locationId,$source, string $ipAddress){
         $session_key = uniqid();
         $affiliateReferral = new AffiliateReferral();
         $affiliateReferral->session_key = $session_key;
@@ -23,6 +23,7 @@ class AffiliateReferralRepository implements AffiliateReferralRepositoryInterfac
         $affiliateReferral->is_confirmed = false;
         $affiliateReferral->client_ip_address = $ipAddress;
         $affiliateReferral->source= $source;
+        $affiliateReferral->location_id = $locationId;
         $affiliateReferral->save();
         return $affiliateReferral;
     }

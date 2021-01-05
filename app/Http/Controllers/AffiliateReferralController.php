@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Constants\HttpStatusCodes;
+use App\Constants\ReferralLocationIdentifiers;
 use App\Services\MaxxApiServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -29,7 +30,7 @@ class AffiliateReferralController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/affiliates/{affiliateId}/referral-sessions",
+     *     path="/api/v1/affiliates/{affiliateId}/referral-sessions/locations/{locationId}",
      *     summary="Create a new affiliate referral session",
      *     tags={"affiliate-referrals"},
      *     description="Create a new affiliate referral session",
@@ -43,6 +44,15 @@ class AffiliateReferralController extends Controller
      *           type="string",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="locationId",
+     *         in="path",
+     *         description="Location id",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="integer",
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=302,
      *         description="Redirect successful"
@@ -53,13 +63,23 @@ class AffiliateReferralController extends Controller
      *     },
      * )
      */
-    public function createAffiliateReferralV1(Request $request, string $affiliateId){
+    public function createAffiliateReferralV1(Request $request, string $affiliateId, int $locationId){
+        $location = null;
+        switch($locationId){
+            case ReferralLocationIdentifiers::ELIXXI:
+                $location = "http://elixx.com";
+                break;
+            default:
+                return Response()->json([
+                    "msg"=>"invalid location id"
+                ],HttpStatusCodes::NOT_ACCEPTABLE);
+        }
         $response = $this->maxxApiService->verifyMemberId($affiliateId);
         $responseData = json_decode($response);
         if($response->status() == 200){
             $affiliateReferral = $this->affiliateReferralRepository->createReferral($affiliateId,
+                $locationId,
                 $request->query("source"), $request->ip());
-            //$redirectUrl = "http://localhost:8089/?affiliate_session_key={$affiliateReferral->session_key}";
             $response = [
               "sessionKey"=>$affiliateReferral->session_key,
                 "affiliateData"=>$responseData

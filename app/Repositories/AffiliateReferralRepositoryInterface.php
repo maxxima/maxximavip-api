@@ -2,7 +2,7 @@
 
     namespace App\Repositories;
     interface AffiliateReferralRepositoryInterface{
-        public function createReferral($memberId,$source,$ipAddress);
+        public function createReferral(string $memberId,int $locationId,$source, string $ipAddress);
         public function getViewCountByLastNumberOfDays(string $affiliateId, int $lastNumberOfDays);
         public function getClickCountByLastNumberOfDays(string $affiliateId, int $lastNumberOfDays);
         public function getConversionCountByLastNumberOfDays(string $affiliateId, int $lastNumberOfDays);
