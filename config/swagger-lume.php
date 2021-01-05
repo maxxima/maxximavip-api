@@ -7,7 +7,7 @@ return [
         | Edit to set the api's title
         |--------------------------------------------------------------------------
          */
-        'title' => 'Maxxima Referral Swagger',
+        'title' => 'Swagger Lume API',
     ],
 
     'routes' => [

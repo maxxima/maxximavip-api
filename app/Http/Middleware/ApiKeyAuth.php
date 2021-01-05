@@ -24,13 +24,15 @@ class ApiKeyAuth
      */
     public function handle($request, Closure $next)
     {
-        $clientApiKey = env(EnvironmentKeys::APP_API_CLIENT_API_KEY);
-        $requestApiKey = $request->header(HttpHeaderKeys::X_API_KEY);
-/*
-        if($requestApiKey != $clientApiKey){
-            return response('Unauthorized.', 401);
+        $disableApiAuth = env(EnvironmentKeys::APP_DISABLE_API_AUTH);
+        if($disableApiAuth != 'true'){
+            $clientApiKey = env(EnvironmentKeys::APP_API_CLIENT_API_KEY);
+            $requestApiKey = $request->header(HttpHeaderKeys::X_API_KEY);
+
+            if($requestApiKey != $clientApiKey){
+                return response('Unauthorized.', 401);
+            }
         }
-*/
         return $next($request);
     }
 
