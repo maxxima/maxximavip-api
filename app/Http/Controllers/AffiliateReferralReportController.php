@@ -32,7 +32,7 @@ class AffiliateReferralReportController extends Controller{
     }
     /**
      * @OA\Get(
-     *     path="/v1/reports/dashboard/{affiliate_id}",
+     *     path="/api/v1/reports/dashboard/{affiliate_id}",
      *     summary="Get dashboard",
      *     tags={"affiliate-referrals-reports"},
      *     description="Get dashboard of commonly used analytics",
@@ -100,7 +100,7 @@ class AffiliateReferralReportController extends Controller{
     }
     /**
      * @OA\Get(
-     *     path="/v1/reports/affiliates/{affiliateId}/total-view-counts/last-number-of-days/{lastNumberOfDays}",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/total-view-counts/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get total view count for the last x number of days",
      *     tags={"affiliate-referrals-reports"},
      *     description="Get total view count for the last x number of days",
@@ -145,7 +145,7 @@ class AffiliateReferralReportController extends Controller{
     }
     /**
      * @OA\Get(
-     *     path="/v1/reports/affiliates/{affiliateId}/total-click-counts/last-number-of-days/{lastNumberOfDays}",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/total-click-counts/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get total click count for the last x number of days",
      *     tags={"affiliate-referrals-reports"},
      *     description="Get total click count for the last x number of days",
@@ -190,7 +190,7 @@ class AffiliateReferralReportController extends Controller{
     }
     /**
      * @OA\Get(
-     *     path="/v1/reports/affiliates/{affiliateId}/total-conversion-counts/last-number-of-days/{lastNumberOfDays}",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/total-conversion-counts/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get total conversion for the last x number of days",
      *     tags={"affiliate-referrals-reports"},
      *     description="Get total conversion for the last x number of days",
@@ -236,7 +236,7 @@ class AffiliateReferralReportController extends Controller{
     }
     /**
      * @OA\Get(
-     *     path="/v1/reports/affiliates/{affiliateId}/view-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/view-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get view count trend across a range of dates for the last x number of days",
      *     tags={"affiliate-referrals-reports"},
      *     description="Get view count trend across a range of dates for the last x number of days",
@@ -283,7 +283,7 @@ class AffiliateReferralReportController extends Controller{
 
     /**
      * @OA\Get(
-     *     path="/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get click count trend across a range of dates for the last x number of days",
      *     tags={"affiliate-referrals-reports"},
      *     description="Get click count trend across a range of dates for the last x number of days",
@@ -329,7 +329,7 @@ class AffiliateReferralReportController extends Controller{
     }
     /**
      * @OA\Get(
-     *     path="/v1/reports/affiliates/{affiliateId}/conversion-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/conversion-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get conversion count trend across a range of dates for the last x number of days",
      *     tags={"affiliate-referrals-reports"},
      *     description="Get conversion count trend across a range of dates for the last x number of days",
@@ -377,7 +377,7 @@ class AffiliateReferralReportController extends Controller{
 
     /**
      * @OA\Get(
-     *     path="/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get affiliate referral conversion trend across a range of dates by geolocation for the x last number of days",
      *     tags={"affiliate-referrals-reports"},
      *     description="Get affiliate referral conversion trend across a range of dates by geolocation for the x last number of days",

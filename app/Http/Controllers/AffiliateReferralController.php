@@ -76,7 +76,7 @@ class AffiliateReferralController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/v1/affiliate-referrals/session-keys/{sessionKey}/conversion-confirmations",
+     *     path="/api/v1/affiliate-referrals/session-keys/{sessionKey}/conversion-confirmations",
      *     summary="Confirm referral session",
      *     tags={"affiliate-referrals"},
      *     description="Confim referral session after successful purchase",
