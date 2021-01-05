@@ -7,7 +7,7 @@ class HealthController extends Controller{
 
     public function health(){
         return response()->json([
-            "health"=>"1.0.0.1",
+            "health"=>"1.0.0.2",
             "phpVersion"=>phpversion()
         ]);
     }
