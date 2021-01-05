@@ -19,8 +19,8 @@ $router->get('/', function () use ($router) {
 */
 $router->get('hello-world', 'HelloWorldController@helloWorld');
 
-$router->get('v1/health','HealthController@health');
-$router->get('v1/swagger-lumen-doc-generations','HealthController@generateSwaggerLumenDocs');
+$router->get('/api/v1/health','HealthController@health');
+$router->get('/api/v1/swagger-lumen-doc-generations','HealthController@generateSwaggerLumenDocs');
 
 //affiliate-referral-click routes
 
