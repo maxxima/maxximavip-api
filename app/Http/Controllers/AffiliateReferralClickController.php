@@ -26,7 +26,6 @@ class AffiliateReferralClickController
      *     description="Create a new affiliate referral click. Referral click is throttled at one url per session. Url can only be of these values: #home|#benefits|#buy-now|#contacts",
      *     operationId="",
      * @OA\RequestBody(
-     *     request="application/json",
      *    required=true,
      *    description="Click information",
      *    @OA\JsonContent(
