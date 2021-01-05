@@ -80,8 +80,10 @@ class AffiliateReferralController extends Controller
             $affiliateReferral = $this->affiliateReferralRepository->createReferral($affiliateId,
                 $locationId,
                 $request->query("source"), $request->ip());
+            $sessionKey = $affiliateReferral->session_key;
             $response = [
-              "sessionKey"=>$affiliateReferral->session_key,
+              "sessionKey"=>$sessionKey,
+                "location"=>$location."?referral_session_key=".$sessionKey,
                 "affiliateData"=>$responseData
             ];
             return Response()->json($response,HttpStatusCodes::OK);
