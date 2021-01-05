@@ -24,7 +24,7 @@ $router->get('/api/v1/swagger-lumen-doc-generations','HealthController@generateS
 
 //affiliate-referral-click routes
 
-$router->post('/api/v1/affiliates-clicks/sessions/{sessionKey}', [
+$router->post('/api/v1/affiliate-clicks/sessions/{sessionKey}', [
     'middleware'=>'apiKeyAuth',
     'uses'=>'AffiliateReferralClickController@createNewClickV1']);
 
