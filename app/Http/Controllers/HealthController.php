@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Artisan;
 
 class HealthController extends Controller{
 
@@ -9,5 +10,10 @@ class HealthController extends Controller{
             "health"=>"1.0.0.1",
             "phpVersion"=>phpversion()
         ]);
+    }
+
+    public function generateSwaggerLumenDocs(){
+        Artisan::call("swagger-lume:generate");
+        return "Ok";
     }
 }

@@ -20,6 +20,8 @@ $router->get('/', function () use ($router) {
 $router->get('hello-world', 'HelloWorldController@helloWorld');
 
 $router->get('v1/health','HealthController@health');
+$router->get('v1/swagger-lumen-doc-generations','HealthController@generateSwaggerLumenDocs');
+
 //affiliate-referral-click routes
 
 $router->post('/api/v1/affiliates-clicks/sessions/{sessionKey}', [
