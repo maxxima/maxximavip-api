@@ -8,7 +8,8 @@
         public function getConversionCountByLastNumberOfDays(string $affiliateId, int $lastNumberOfDays);
         public function getViewCountAcrossDates(string $affiliateId,int $lastNumberOfDays);
         public function getConversionCountAcrossDates(string $affiliateId, int $lastNumberOfDays);
-        public function getConversionGeoDistributionAcrossDates(string $affiliateId, int $lastNumberOfDays);
+        public function getConversionGeoDistributionByCountryAcrossDates(string $affiliateId, int $lastNumberOfDays);
+        public function getConversionGeoDistributionByRegionAcrossDates(string $affiliateId, string $countryCode, int $lastNumberOfDays);
         public function createReferralClick(string $affiliateId, string $sessionKey,string $url);
         public function getReferralBySessionKey(string $sessionKey);
         public function getLastReferralClick(string $sessionKey, string $url);

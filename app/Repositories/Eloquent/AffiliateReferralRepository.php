@@ -121,7 +121,7 @@ EOD;
         return $this->createDateCountTrendByDateRange($resultArray,$startEndDate->startDate,$startEndDate->endDate);
     }
 
-    public function getConversionGeoDistributionAcrossDates(string $affiliateId, int $lastNumberOfDays){
+    public function getConversionGeoDistributionByCountryAcrossDates(string $affiliateId, int $lastNumberOfDays){
         $startEndDate = $this->getStartEndDateByLastNumberOfDays($lastNumberOfDays);
         /*
         $affiliateReferrals = AffiliateReferral::
@@ -209,6 +209,25 @@ EOD;
 
     }
 
+    public function getConversionGeoDistributionByRegionAcrossDates(string $affiliateId, string $countryCode, int $lastNumberOfDays){
+        $startEndDate = $this->getStartEndDateByLastNumberOfDays($lastNumberOfDays);
+        $sql = <<<EOD
+SELECT geo_origin_region AS regionCode,
+geo_origin_region_name As regionName,
+COUNT(geo_origin_region) count
+FROM affiliate_referral
+WHERE
+affiliate_id = :affiliateId 
+AND geo_origin_country_code = :countryCode
+AND DATE(created_timestamp) >= :startDate AND DATE(created_timestamp) <= :endDate
+AND is_confirmed = 1 AND geo_origin_country_code IS NOT NULL
+GROUP BY
+geo_origin_region,
+geo_origin_region_name
+ORDER BY count DESC
+EOD;
+        return Db::select($sql,["affiliateId"=>$affiliateId,"countryCode"=>$countryCode,"startDate"=>$startEndDate->startDate,"endDate"=>$startEndDate->endDate]);
+    }
 
     public function getReferralBySessionKey(string $sessionKey){
         return AffiliateReferral::find($sessionKey);

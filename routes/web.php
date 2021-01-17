@@ -75,7 +75,12 @@ $router->get('/api/v1/reports/affiliates/{affiliateId}/conversion-counts-across-
 ]);
 
 
-$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/last-number-of-days/{lastNumberOfDays}',[
+$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/last-number-of-days/{lastNumberOfDays}',[
     'middleware'=>'apiKeyAuth',
-    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionAcrossDatesV1'
+    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByCountryAcrossDatesV1'
+]);
+
+$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/{countryCode}/regions/last-number-of-days/{lastNumberOfDays}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByRegionAcrossDatesV1'
 ]);

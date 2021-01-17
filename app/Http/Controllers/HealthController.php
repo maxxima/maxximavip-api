@@ -7,7 +7,7 @@ class HealthController extends Controller{
 
     public function health(){
         return response()->json([
-            "tag"=>"1.0.1"
+            "tag"=>"1.0.1.1"
         ]);
     }
 
