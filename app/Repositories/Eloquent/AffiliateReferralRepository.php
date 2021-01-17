@@ -146,6 +146,7 @@ EOD;
 
         $totalPages = (int)floor((count($ipAddressesWithNoInformationList) / 100))+1;
 
+
         for($i=0; $i < $totalPages; $i++){
             $pagedIpAddressesWithNoInformationList = $ipAddressesWithNoInformationList->forPage($i, 100);
             $responseString = Http::post('http://ip-api.com/batch', $pagedIpAddressesWithNoInformationList->toArray());
@@ -159,13 +160,19 @@ EOD;
                     $countryCode = $ipAddressInfo->countryCode;
                     $lat = $ipAddressInfo->lat;
                     $lng = $ipAddressInfo->lon;
+                    $region = $ipAddressInfo->region;
+                    $regionName = $ipAddressInfo->regionName;
+                    $city = $ipAddressInfo->city;
 
                     $sql = <<<EOD
 UPDATE affiliate_referral SET
 geo_origin_country_name = :geoOriginCountryName,
 geo_origin_country_code = :geoOriginCountryCode,
 geo_origin_country_lat = :geoOriginCountryLat,
-geo_origin_country_lng = :geoOriginCountryLng
+geo_origin_country_lng = :geoOriginCountryLng,
+geo_origin_region = :region,
+geo_origin_region_name = :regionName,
+geo_origin_city = :city                       
 WHERE affiliate_id = :affiliateId AND client_ip_address = :clientIpAddress
 AND DATE(created_timestamp) >= :startDate AND DATE(created_timestamp) <= :endDate
 AND is_confirmed = true
@@ -177,7 +184,10 @@ EOD;
                         'geoOriginCountryName'=>$countryName,
                         'geoOriginCountryLat'=>$lat,
                         'geoOriginCountryLng'=>$lng,
-                        'clientIpAddress'=>$ipAddress
+                        'clientIpAddress'=>$ipAddress,
+                        'region'=>$region,
+                        'regionName'=>$regionName,
+                        'city'=>$city
                         ]);
                 }
             }
@@ -185,23 +195,20 @@ EOD;
         $sql = <<<EOD
 SELECT geo_origin_country_name AS countryName,
 geo_origin_country_code As countryCode,
-geo_origin_country_lat AS lat,
-geo_origin_country_lng AS lng,
 COUNT(geo_origin_country_code) count
 FROM affiliate_referral
 WHERE
 affiliate_id = :affiliateId AND DATE(created_timestamp) >= :startDate AND DATE(created_timestamp) <= :endDate
-AND is_confirmed = 1 AND geo_origin_country_name IS NOT NULL
+AND is_confirmed = 1 AND geo_origin_country_code IS NOT NULL
 GROUP BY
 geo_origin_country_name,
-geo_origin_country_code,
-geo_origin_country_lat,
-geo_origin_country_lng
+geo_origin_country_code
 ORDER BY count DESC
 EOD;
         return Db::select($sql,["affiliateId"=>$affiliateId,"startDate"=>$startEndDate->startDate,"endDate"=>$startEndDate->endDate]);
 
     }
+
 
     public function getReferralBySessionKey(string $sessionKey){
         return AffiliateReferral::find($sessionKey);
