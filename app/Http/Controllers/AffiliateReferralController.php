@@ -54,9 +54,14 @@ class AffiliateReferralController extends Controller
      *         )
      *     ),
      *     @OA\Response(
-     *         response=302,
-     *         description="Redirect successful"
+     *         response=200,
+     *         description="Referral session successfully created"
      *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Referral session successfully created"
+     *     ),
+     *
      *     deprecated=false,
      *     security={
      *         {"apiKeyAuth": {}}
@@ -74,9 +79,9 @@ class AffiliateReferralController extends Controller
                     "msg"=>"invalid location id"
                 ],HttpStatusCodes::NOT_ACCEPTABLE);
         }
-        $response = $this->maxxApiService->verifyMemberId($affiliateId);
+        $response = $this->maxxApiService->verifyMember($affiliateId);
         $responseData = json_decode($response);
-        if($response->status() == 200){
+        if($response->status() == 200 && $responseData->msg=="OK"){
             $affiliateReferral = $this->affiliateReferralRepository->createReferral($affiliateId,
                 $locationId,
                 $request->query("source"), $request->ip());
