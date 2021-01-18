@@ -32,6 +32,13 @@ class AffiliateReferralRepository implements AffiliateReferralRepositoryInterfac
         return AffiliateReferral::
         where([['affiliate_id','=',$affiliateId],['created_timestamp','>=',$date]])->count();
     }
+
+    public function getViewCountByDateRange(string $affiliateId, $startDate, $endDate){
+        return AffiliateReferral::where([
+            ['affiliate_id','=',$affiliateId],
+            ['created_timestamp','>=',$startDate],['created_timestamp','<=',$endDate]])->count();
+    }
+
     public function getClickCountByLastNumberOfDays(string $affiliateId, int $lastNumberOfDays){
         $date = Carbon::now('UTC')->subDays($lastNumberOfDays)->format('Y-m-d');
         return AffiliateReferralClick::

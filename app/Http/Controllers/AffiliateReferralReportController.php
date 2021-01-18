@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Constants\HttpStatusCodes;
 use App\Repositories\AffiliateReferralRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AffiliateReferralReportController extends Controller{
@@ -283,6 +284,60 @@ class AffiliateReferralReportController extends Controller{
 
     /**
      * @OA\Get(
+     *     path="/api/v1/reports/affiliates/{affiliateId}/total-view-counts/date-range/{startDate}/{endDate}",
+     *     summary="Get total view count between dates",
+     *     tags={"affiliate-referrals-reports"},
+     *     description="Get total view counts between date range",
+     *     operationId="",
+     *     @OA\Parameter(
+     *         name="affiliateId",
+     *         in="path",
+     *         description="Affiliate id",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="startDate",
+     *         in="path",
+     *         description="start date in format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="endDate",
+     *         in="path",
+     *         description="end date in format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     ),
+     *      security={
+     *         {"apiKeyAuth": {}}
+     *     },
+     *     deprecated=false
+     * )
+     **/
+    public function getViewCountByDateRangeV1(string $affiliateId, string $startDate,string $endDate){
+
+        $startDateCarbon = Carbon::parse($startDate);
+        $endDateCarbon = Carbon::parse($endDate);
+
+        $data = $this->affiliateReferralRepository->getViewCountByDateRange($affiliateId,$startDateCarbon,$endDateCarbon);
+
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get click count trend across a range of dates for the last x number of days",
      *     tags={"affiliate-referrals-reports"},
@@ -374,7 +429,6 @@ class AffiliateReferralReportController extends Controller{
         ];
         return response()->json($data);
     }
-
     /**
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/last-number-of-days/{lastNumberOfDays}",
@@ -421,7 +475,6 @@ class AffiliateReferralReportController extends Controller{
         ];
         return response()->json($data);
     }
-
     /**
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/{countryCode}/regions/last-number-of-days/{lastNumberOfDays}",
@@ -477,5 +530,4 @@ class AffiliateReferralReportController extends Controller{
         ];
         return response()->json($data);
     }
-
 }

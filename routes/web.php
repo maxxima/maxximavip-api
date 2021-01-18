@@ -84,3 +84,9 @@ $router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-acr
     'middleware'=>'apiKeyAuth',
     'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByRegionAcrossDatesV1'
 ]);
+
+
+$router->get('/api/v1/reports/affiliates/{affiliateId}/total-view-counts/date-range/{startDate}/{endDate}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralReportController@getViewCountByDateRangeV1'
+]);
