@@ -146,6 +146,17 @@ EOD;
         return $this->createDateCountTrendByDateRange($resultArray,$startEndDate->startDate,$startEndDate->endDate);
     }
 
+    public function getConversionCountAcrossDatesByDateRange(string $affiliateId, string $startDate, string $endDate){
+        $sql= <<<EOD
+SELECT DATE(confirmed_timestamp) AS date, COUNT(confirmed_timestamp) AS count FROM affiliate_referral
+WHERE is_confirmed = 1 AND affiliate_id = :affiliateId AND DATE(confirmed_timestamp) >= :startDate AND DATE(confirmed_timestamp) <= :endDate
+GROUP BY date ORDER BY date DESC
+EOD;
+
+        $resultArray = Db::select($sql,["affiliateId"=>$affiliateId,"startDate"=>$startDate,"endDate"=>$endDate]);
+        return $this->createDateCountTrendByDateRange($resultArray,$startDate,$endDate);
+    }
+
     public function getConversionGeoDistributionByCountryAcrossDates(string $affiliateId, int $lastNumberOfDays){
         $startEndDate = $this->getStartEndDateByLastNumberOfDays($lastNumberOfDays);
         /*

@@ -537,6 +537,60 @@ class AffiliateReferralReportController extends Controller{
         ];
         return response()->json($data);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/affiliates/{affiliateId}/conversion-counts-across-dates/date-range/{startDate}/{endDate}",
+     *     summary="Get conversion count trend across a range of dates between a date range",
+     *     tags={"affiliate-referrals-reports"},
+     *     description="Get conversion count trend across a range of dates between a date range",
+     *     operationId="",
+     *     @OA\Parameter(
+     *         name="affiliateId",
+     *         in="path",
+     *         description="Affiliate id",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="startDate",
+     *         in="path",
+     *         description="start date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="endDate",
+     *         in="path",
+     *         description="end date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     ),
+     *      security={
+     *         {"apiKeyAuth": {}}
+     *     },
+     *     deprecated=false
+     * )
+     **/
+    public function getConversionCountAcrossDatesByDateRangeV1(string $affiliateId,string $startDate, string $endDate){
+
+        $conversionCount = $this->affiliateReferralRepository->getConversionCountAcrossDatesByDateRange($affiliateId, $startDate, $endDate);
+        $data = [
+            "conversionCount"=>$conversionCount
+        ];
+        return response()->json($data);
+    }
+
     /**
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/last-number-of-days/{lastNumberOfDays}",
