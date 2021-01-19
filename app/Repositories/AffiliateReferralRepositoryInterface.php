@@ -8,7 +8,7 @@
         public function getConversionCountByLastNumberOfDays(string $affiliateId, int $lastNumberOfDays);
         public function getViewCountAcrossDates(string $affiliateId,int $lastNumberOfDays);
         public function getConversionCountAcrossDates(string $affiliateId, int $lastNumberOfDays);
-
+        public function getConversionCountByDateRange(string $affiliateId, $startDate, $endDate);
         public function getConversionCountAcrossDatesByDateRange(string $affiliateId,$startDate,$endDate);
 
         public function getConversionGeoDistributionByCountry(string $affiliateId, int $lastNumberOfDays);

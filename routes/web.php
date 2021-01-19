@@ -39,10 +39,20 @@ $router->post('/api/v1/affiliate-referrals/session-keys/{sessionKey}/conversion-
 
 
 //affiliate-report routes
-$router->get('/api/v1/reports/dashboard/{affiliate_id}',
+$router->get('/api/v1/reports/dashboard/affiliates/{affiliateId}/date-range/{startDate}/{endDate}',
     [
         'middleware'=>'apiKeyAuth',
-        'uses'=>'AffiliateReferralReportController@dashboardV1']);
+        'uses'=>'AffiliateReferralReportController@dashboardByDateRangeV1']);
+
+$router->get('/api/v1/reports/dashboard/affiliates/{affiliateId}/date-range/{startDate}/{endDate}',
+    [
+        'middleware'=>'apiKeyAuth',
+        'uses'=>'AffiliateReferralReportController@dashboardByDateRangeV1']);
+
+$router->get('/api/v1/reports/dashboard/referral-stats/affiliates/{affiliateId}/{startDate}/{endDate}',
+    [
+        'middleware'=>'apiKeyAuth',
+        'uses'=>'AffiliateReferralReportController@dashboardReferralStatsByDateRangeV1']);
 
 $router->get('/api/v1/reports/affiliates/{affiliateId}/total-view-counts/last-number-of-days/{lastNumberOfDays}',[
     'middleware'=>'apiKeyAuth',
@@ -57,6 +67,11 @@ $router->get('/api/v1/reports/affiliates/{affiliateId}/total-click-counts/last-n
 $router->get('/api/v1/reports/affiliates/{affiliateId}/total-conversion-counts/last-number-of-days/{lastNumberOfDays}',[
     'middleware'=>'apiKeyAuth',
     'uses'=>'AffiliateReferralReportController@getTotalConversionCountByLastNumberOfDaysV1'
+]);
+
+$router->get('/api/v1/reports/affiliates/{affiliateId}/total-conversion-counts/date-range/{startDate}/{endDate}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralReportController@getConversionCountByDateRangeV1'
 ]);
 
 $router->get('/api/v1/reports/affiliates/{affiliateId}/view-counts-across-dates/last-number-of-days/{lastNumberOfDays}',[

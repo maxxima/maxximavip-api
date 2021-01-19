@@ -47,9 +47,8 @@ class AffiliateReferralRepository implements AffiliateReferralRepositoryInterfac
         where([['affiliate_id','=',$affiliateId],['created_timestamp','>=',$date]])->count();
     }
     public function getClickCountByDateRange(string $affiliateId, $startDate, $endDate){
-        return AffiliateReferral::where([
+        return AffiliateReferralClick::where([
             ['affiliate_id','=',$affiliateId],
-            ['is_confirmed','=',1],
             ['created_timestamp','>=',$startDate],['created_timestamp','<=',$endDate]])->count();
     }
 
@@ -59,6 +58,10 @@ class AffiliateReferralRepository implements AffiliateReferralRepositoryInterfac
         $date = Carbon::now('UTC')->subDays($lastNumberOfDays)->format('Y-m-d');
         return AffiliateReferral::
         where([['affiliate_id','=',$affiliateId],['is_confirmed','=',true],['created_timestamp','>=',$date]])->count();
+    }
+    public function getConversionCountByDateRange(string $affiliateId, $startDate, $endDate){
+        return AffiliateReferral::
+        where([['is_confirmed','=',1],['affiliate_id','=',$affiliateId],['created_timestamp','>=',$startDate],['created_timestamp','<=',$endDate]])->count();
     }
 
     private function findTrendByDate($trends,$date){
