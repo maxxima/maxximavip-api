@@ -74,15 +74,23 @@ $router->get('/api/v1/reports/affiliates/{affiliateId}/conversion-counts-across-
     'uses'=>'AffiliateReferralReportController@getConversionCountAcrossDatesV1'
 ]);
 
-
-$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/last-number-of-days/{lastNumberOfDays}',[
+$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts/countries/date-range/{startDate}/{endDate}',[
     'middleware'=>'apiKeyAuth',
-    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByCountryAcrossDatesV1'
+    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByCountryByDateRangeV1'
+]);
+$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts/countries/last-number-of-days/{lastNumberOfDays}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByCountryByLastNumberOfDaysV1'
 ]);
 
-$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/{countryCode}/regions/last-number-of-days/{lastNumberOfDays}',[
+
+$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts/countries/{countryCode}/regions/last-number-of-days/{lastNumberOfDays}',[
     'middleware'=>'apiKeyAuth',
-    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByRegionAcrossDatesV1'
+    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByRegionByDateRangeV1'
+]);
+$router->get('/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts/countries/{countryCode}/regions/date-range/{startDate}/{endDate}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralReportController@getConversionGeoDistributionByRegionByDateRangeV1'
 ]);
 
 

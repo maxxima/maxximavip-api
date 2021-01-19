@@ -35,7 +35,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/dashboard/{affiliate_id}",
      *     summary="Get dashboard",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-dashboard-reports"},
      *     description="Get dashboard of commonly used analytics",
      *     operationId="",
      *     @OA\Parameter(
@@ -82,7 +82,7 @@ class AffiliateReferralReportController extends Controller{
         $clickCountTrendPerDates = $repo->getClickCountAcrossDates($affiliate_id,$lastNumberOfDays);
         $conversionCountTrendPerDates = $repo->getConversionCountAcrossDates($affiliate_id,$lastNumberOfDays);
 
-        $geo = $repo->getConversionGeoDistributionByCountryAcrossDates($affiliate_id,$lastNumberOfDays);
+        $geo = $repo->getConversionGeoDistributionByCountry($affiliate_id,$lastNumberOfDays);
 
         $response = [
             "Today"=>[
@@ -103,7 +103,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/total-view-counts/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get total view count for the last x number of days",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-total-count-reports"},
      *     description="Get total view count for the last x number of days",
      *     operationId="",
      *     @OA\Parameter(
@@ -148,7 +148,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/total-click-counts/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get total click count for the last x number of days",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-total-count-reports"},
      *     description="Get total click count for the last x number of days",
      *     operationId="",
      *     @OA\Parameter(
@@ -193,7 +193,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/total-conversion-counts/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get total conversion for the last x number of days",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-total-count-reports"},
      *     description="Get total conversion for the last x number of days",
      *     operationId="",
      *     @OA\Parameter(
@@ -239,7 +239,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/view-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get view count trend across a range of dates for the last x number of days",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-date-trend-reports"},
      *     description="Get view count trend across a range of dates for the last x number of days",
      *     operationId="",
      *     @OA\Parameter(
@@ -285,7 +285,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/total-view-counts/date-range/{startDate}/{endDate}",
      *     summary="Get total view count between dates",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-total-count-reports"},
      *     description="Get total view counts between date range",
      *     operationId="",
      *     @OA\Parameter(
@@ -340,7 +340,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/total-click-counts/date-range/{startDate}/{endDate}",
      *     summary="Get total click count between dates",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-total-count-reports"},
      *     description="Get total click count between date range",
      *     operationId="",
      *     @OA\Parameter(
@@ -394,7 +394,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get click count trend across a range of dates for the last x number of days",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-date-trend-reports"},
      *     description="Get click count trend across a range of dates for the last x number of days",
      *     operationId="",
      *     @OA\Parameter(
@@ -441,7 +441,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/date-range/{startDate}/{endDate}",
      *     summary="Get click count trend across a range of dates between a date range",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-date-trend-reports"},
      *     description="Get click count trend across a range of dates between a date range",
      *     operationId="",
      *     @OA\Parameter(
@@ -494,7 +494,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/conversion-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
      *     summary="Get conversion count trend across a range of dates for the last x number of days",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-date-trend-reports"},
      *     description="Get conversion count trend across a range of dates for the last x number of days",
      *     operationId="",
      *     @OA\Parameter(
@@ -542,7 +542,7 @@ class AffiliateReferralReportController extends Controller{
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/conversion-counts-across-dates/date-range/{startDate}/{endDate}",
      *     summary="Get conversion count trend across a range of dates between a date range",
-     *     tags={"affiliate-referrals-reports"},
+     *     tags={"affiliate-referrals-date-trend-reports"},
      *     description="Get conversion count trend across a range of dates between a date range",
      *     operationId="",
      *     @OA\Parameter(
@@ -593,10 +593,63 @@ class AffiliateReferralReportController extends Controller{
 
     /**
      * @OA\Get(
-     *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/last-number-of-days/{lastNumberOfDays}",
-     *     summary="Get affiliate referral conversion trend across a range of dates by country for the x last number of days",
-     *     tags={"affiliate-referrals-reports"},
-     *     description="Get affiliate referral conversion trend across a range of dates by country for the x last number of days",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts/countries/date-range/{startDate}/{endDate}",
+     *     summary="Get affiliate referral conversion trend across a range of dates by country by date range",
+     *     tags={"affiliate-referrals-geo-reports"},
+     *     description="Get affiliate referral conversion trend across a range of dates by country by date range",
+     *     operationId="",
+     *     @OA\Parameter(
+     *         name="affiliateId",
+     *         in="path",
+     *         description="Affiliate id",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="startDate",
+     *         in="path",
+     *         description="start date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="endDate",
+     *         in="path",
+     *         description="end date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     ),
+     *      security={
+     *         {"apiKeyAuth": {}}
+     *     },
+     *     deprecated=false
+     * )
+     **/
+    public function getConversionGeoDistributionByCountryByDateRangeV1(string $affiliateId,string $startDate, string $endDate){
+        $conversionCount = $this->affiliateReferralRepository
+            ->getConversionGeoDistributionByCountryByDateRange($affiliateId,$startDate,$endDate);
+        $data = [
+            "conversionCount"=>$conversionCount
+        ];
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts/countries/last-number-of-days/{lastNumberOfDays}",
+     *     summary="Get affiliate referral conversion count by country for the x last number of days",
+     *     tags={"affiliate-referrals-geo-reports"},
+     *     description="Get affiliate referral conversion count by country for the x last number of days",
      *     operationId="",
      *     @OA\Parameter(
      *         name="affiliateId",
@@ -626,23 +679,25 @@ class AffiliateReferralReportController extends Controller{
      *     deprecated=false
      * )
      **/
-    public function getConversionGeoDistributionByCountryAcrossDatesV1(string $affiliateId,int $lastNumberOfDays){
-        $conversionCount = $this->affiliateReferralRepository
-            ->getConversionGeoDistributionByCountryAcrossDates($affiliateId, $lastNumberOfDays);
+    public function getConversionGeoDistributionByCountryByLastNumberOfDaysV1(string $affiliateId,int $lastNumberOfDays){
         if($this->tryIsValidNumberOfDays($lastNumberOfDays,$errorMessage) == false) return Response([
             "msg"=>$errorMessage
         ]);
+        $conversionCount = $this->affiliateReferralRepository
+            ->getConversionGeoDistributionByCountry($affiliateId, $lastNumberOfDays);
+
         $data = [
             "conversionCount"=>$conversionCount
         ];
         return response()->json($data);
     }
+
     /**
      * @OA\Get(
-     *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts-across-dates/countries/{countryCode}/regions/last-number-of-days/{lastNumberOfDays}",
-     *     summary="Get affiliate referral conversion trend across a range of dates by country for the x last number of days",
-     *     tags={"affiliate-referrals-reports"},
-     *     description="Get affiliate referral conversion trend across a range of dates by country for the x last number of days",
+     *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts/countries/{countryCode}/regions/last-number-of-days/{lastNumberOfDays}",
+     *     summary="Get affiliate referral conversion count by country x last number of days",
+     *     tags={"affiliate-referrals-geo-reports"},
+     *     description="Get affiliate referral conversion count by country x last number of days",
      *     operationId="",
      *     @OA\Parameter(
      *         name="affiliateId",
@@ -681,12 +736,78 @@ class AffiliateReferralReportController extends Controller{
      *     deprecated=false
      * )
      **/
-    public function getConversionGeoDistributionByRegionAcrossDatesV1(string $affiliateId,string $countryCode, int $lastNumberOfDays){
-        $conversionCount = $this->affiliateReferralRepository
-            ->getConversionGeoDistributionByRegionAcrossDates($affiliateId,$countryCode, $lastNumberOfDays);
+    public function getConversionGeoDistributionByRegionByLastNumberOfDaysV1(string $affiliateId,string $countryCode, int $lastNumberOfDays){
         if($this->tryIsValidNumberOfDays($lastNumberOfDays,$errorMessage) == false) return Response([
             "msg"=>$errorMessage
         ]);
+
+        $conversionCount = $this->affiliateReferralRepository
+            ->getConversionGeoDistributionByRegionByLastNumberOfDays($affiliateId,$countryCode, $lastNumberOfDays);
+
+        $data = [
+            "conversionCount"=>$conversionCount
+        ];
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/affiliates/{affiliateId}/geo-conversion-counts/countries/{countryCode}/regions/date-range/{startDate}/{endDate}",
+     *     summary="Get affiliate referral conversion count by country x last number of days",
+     *     tags={"affiliate-referrals-geo-reports"},
+     *     description="Get affiliate referral conversion count by country x last number of days",
+     *     operationId="",
+     *     @OA\Parameter(
+     *         name="affiliateId",
+     *         in="path",
+     *         description="Affiliate id",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="countryCode",
+     *         in="path",
+     *         description="Country Code e.g MY",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="startDate",
+     *         in="path",
+     *         description="start date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="endDate",
+     *         in="path",
+     *         description="end date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     ),
+     *      security={
+     *         {"apiKeyAuth": {}}
+     *     },
+     *     deprecated=false
+     * )
+     **/
+    public function getConversionGeoDistributionByRegionByDateRangeV1(string $affiliateId,string $countryCode, string $startDate, string $endDate){
+
+        $conversionCount = $this->affiliateReferralRepository
+            ->getConversionGeoDistributionByRegionByDateRange($affiliateId,$countryCode,$startDate,$endDa);
+
         $data = [
             "conversionCount"=>$conversionCount
         ];
