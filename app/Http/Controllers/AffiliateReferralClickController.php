@@ -110,4 +110,61 @@ class AffiliateReferralClickController
             ],HttpStatusCodes::BAD_REQUEST);
         }
     }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/affiliates/{affiliateId}/clicks/total-counts/date-range/{startDate}/{endDate}",
+     *     summary="Get affiliate click total per url between date range",
+     *     tags={"affiliate-referral-clicks"},
+     *     description="Get affiliate click total per url between date range",
+     *     operationId="",
+     *     @OA\Parameter(
+     *         name="affiliateId",
+     *         in="path",
+     *         description="Affiliate id",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="startDate",
+     *         in="path",
+     *         description="start date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="endDate",
+     *         in="path",
+     *         description="end date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     ),
+     *      security={
+     *         {"apiKeyAuth": {}}
+     *     },
+     *     deprecated=false
+     * )
+     **/
+    public function getTotalClickPerUrlDateRangeV1(string $affiliateId, string $startDate, string $endDate){
+
+        $clickCounts = $this->affiliateReferralRepository
+            ->getTotalClicksPerUrlBetweenDateRange($affiliateId,$startDate,$endDate);
+
+        $data = [
+            "clickCounts"=>$clickCounts
+        ];
+
+        return response()->json($data);
+    }
 }

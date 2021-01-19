@@ -289,6 +289,22 @@ EOD;
         $newClick->save();
         return $newClick;
     }
+
+    public function getTotalClicksPerUrlBetweenDateRange(string $affiliateId, $startDate, $endDate)
+    {
+        $sql = <<<EOD
+SELECT url,
+COUNT(url) count
+FROM affiliate_referral_click
+WHERE
+affiliate_id = :affiliateId 
+AND DATE(created_timestamp) >= :startDate AND DATE(created_timestamp) <= :endDate
+GROUP BY
+url
+ORDER BY count DESC
+EOD;
+        return Db::select($sql,["affiliateId"=>$affiliateId,"startDate"=>$startDate,"endDate"=>$endDate]);
+    }
 }
 
 class StartEndDate{

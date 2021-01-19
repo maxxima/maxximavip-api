@@ -552,13 +552,11 @@ class AffiliateReferralReportController extends Controller{
     public function getConversionGeoDistributionByRegionByDateRangeV1(string $affiliateId,string $countryCode, string $startDate, string $endDate){
 
         $conversionCount = $this->affiliateReferralRepository
-            ->getConversionGeoDistributionByRegionByDateRange($affiliateId,$countryCode,$startDate,$endDa);
+            ->getConversionGeoDistributionByRegionByDateRange($affiliateId,$countryCode,$startDate,$endDate);
 
         $data = [
             "conversionCount"=>$conversionCount
         ];
         return response()->json($data);
     }
-
-
 }

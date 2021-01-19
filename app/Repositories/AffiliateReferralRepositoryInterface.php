@@ -11,7 +11,7 @@
         public function getConversionCountByDateRange(string $affiliateId, $startDate, $endDate);
         public function getConversionCountAcrossDatesByDateRange(string $affiliateId,$startDate,$endDate);
 
-        public function getTotalClickPer
+        public function getTotalClicksPerUrlBetweenDateRange(string $affiliateId, $startDate,$endDate);
 
         public function getConversionGeoDistributionByCountry(string $affiliateId, int $lastNumberOfDays);
         public function getConversionGeoDistributionByCountryByDateRange(string $affiliateId, $startDate, $endDate);
