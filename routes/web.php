@@ -90,3 +90,15 @@ $router->get('/api/v1/reports/affiliates/{affiliateId}/total-view-counts/date-ra
     'middleware'=>'apiKeyAuth',
     'uses'=>'AffiliateReferralReportController@getViewCountByDateRangeV1'
 ]);
+
+$router->get('/api/v1/reports/affiliates/{affiliateId}/total-click-counts/date-range/{startDate}/{endDate}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralReportController@getClickCountByDateRangeV1'
+]);
+
+
+$router->get('/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/date-range/{startDate}/{endDate}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralReportController@getClickCountAcrossDatesByDateRangeV1'
+]);
+

@@ -281,7 +281,6 @@ class AffiliateReferralReportController extends Controller{
         ];
         return response()->json($data);
     }
-
     /**
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/total-view-counts/date-range/{startDate}/{endDate}",
@@ -327,15 +326,70 @@ class AffiliateReferralReportController extends Controller{
      * )
      **/
     public function getViewCountByDateRangeV1(string $affiliateId, string $startDate,string $endDate){
-
         $startDateCarbon = Carbon::parse($startDate);
         $endDateCarbon = Carbon::parse($endDate);
 
-        $data = $this->affiliateReferralRepository->getViewCountByDateRange($affiliateId,$startDateCarbon,$endDateCarbon);
+        $count = $this->affiliateReferralRepository->getViewCountByDateRange($affiliateId,$startDateCarbon,$endDateCarbon);
 
-        return response()->json($data);
+        return response()->json([
+            "viewCount"=>$count
+        ]);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/affiliates/{affiliateId}/total-click-counts/date-range/{startDate}/{endDate}",
+     *     summary="Get total click count between dates",
+     *     tags={"affiliate-referrals-reports"},
+     *     description="Get total click count between date range",
+     *     operationId="",
+     *     @OA\Parameter(
+     *         name="affiliateId",
+     *         in="path",
+     *         description="Affiliate id",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="startDate",
+     *         in="path",
+     *         description="start date in format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="endDate",
+     *         in="path",
+     *         description="end date in format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     ),
+     *      security={
+     *         {"apiKeyAuth": {}}
+     *     },
+     *     deprecated=false
+     * )
+     **/
+    public function getClickCountByDateRangeV1(string $affiliateId, string $startDate,string $endDate){
+        $startDateCarbon = Carbon::parse($startDate);
+        $endDateCarbon = Carbon::parse($endDate);
+
+        $count = $this->affiliateReferralRepository->getClickCountByDateRange($affiliateId,$startDateCarbon,$endDateCarbon);
+
+        return response()->json([
+            "clickCount"=>$count
+        ]);
+    }
     /**
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/last-number-of-days/{lastNumberOfDays}",
@@ -382,6 +436,60 @@ class AffiliateReferralReportController extends Controller{
         ];
         return response()->json($data);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/date-range/{startDate}/{endDate}",
+     *     summary="Get click count trend across a range of dates between a date range",
+     *     tags={"affiliate-referrals-reports"},
+     *     description="Get click count trend across a range of dates between a date range",
+     *     operationId="",
+     *     @OA\Parameter(
+     *         name="affiliateId",
+     *         in="path",
+     *         description="Affiliate id",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="startDate",
+     *         in="path",
+     *         description="start date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="endDate",
+     *         in="path",
+     *         description="end date in the format yyyy-mm-dd",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     ),
+     *      security={
+     *         {"apiKeyAuth": {}}
+     *     },
+     *     deprecated=false
+     * )
+     **/
+    public function getClickCountAcrossDatesByDateRangeV1(string $affiliateId,string $startDate, string $endDate){
+
+        $viewCount = $this->affiliateReferralRepository->getClickCountAcrossDatesByDateRange($affiliateId, $startDate,$endDate);
+        $data = [
+            "viewCount"=>$viewCount
+        ];
+        return response()->json($data);
+    }
+
     /**
      * @OA\Get(
      *     path="/api/v1/reports/affiliates/{affiliateId}/conversion-counts-across-dates/last-number-of-days/{lastNumberOfDays}",

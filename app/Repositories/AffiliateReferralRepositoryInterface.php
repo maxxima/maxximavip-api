@@ -15,4 +15,6 @@
         public function getLastReferralClick(string $sessionKey, string $url);
         public function getClickCountAcrossDates(string $affiliateId, $lastNumberOfDays);
         public function getViewCountByDateRange(string $affiliateId, $startDate, $endDate);
+        public function getClickCountByDateRange(string $affiliateId, $startDate, $endDate);
+        public function getClickCountAcrossDatesByDateRange(string $affiliateId, $startDate, $endDate);
     }

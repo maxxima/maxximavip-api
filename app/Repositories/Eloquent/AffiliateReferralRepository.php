@@ -44,6 +44,14 @@ class AffiliateReferralRepository implements AffiliateReferralRepositoryInterfac
         return AffiliateReferralClick::
         where([['affiliate_id','=',$affiliateId],['created_timestamp','>=',$date]])->count();
     }
+
+    public function getClickCountByDateRange(string $affiliateId, $startDate, $endDate){
+        return AffiliateReferral::where([
+            ['affiliate_id','=',$affiliateId],
+            ['is_confirmed','=',1],
+            ['created_timestamp','>=',$startDate],['created_timestamp','<=',$endDate]])->count();
+    }
+
     public function getConversionCountByLastNumberOfDays(string $affiliateId, int $lastNumberOfDays)
     {
         $date = Carbon::now('UTC')->subDays($lastNumberOfDays)->format('Y-m-d');
@@ -100,7 +108,17 @@ EOD;
         $resultArray = Db::select($sql,["affiliateId"=>$affiliateId,"startDate"=>$startEndDate->startDate,"endDate"=>$startEndDate->endDate]);
 
         return $this->createDateCountTrendByDateRange($resultArray,$startEndDate->startDate,$startEndDate->endDate);
+    }
 
+    public function getClickCountAcrossDatesByDateRange(string $affiliateId, $startDate, $endDate){
+        $sql = <<<EOD
+SELECT DATE(created_timestamp) AS date,COUNT(created_timestamp) AS count FROM affiliate_referral_click
+WHERE affiliate_id = :affiliateId AND DATE(created_timestamp) >= :startDate AND DATE(created_timestamp) <= :endDate
+GROUP BY date ORDER BY date DESC
+EOD;
+        $resultArray = Db::select($sql,["affiliateId"=>$affiliateId,"startDate"=>$startDate,"endDate"=>$endDate]);
+
+        return $this->createDateCountTrendByDateRange($resultArray,$startDate,$endDate);
     }
 
     public function getViewCountAcrossDates(string $affiliateId,int $lastNumberOfDays){
