@@ -94,4 +94,9 @@ $router->get('/api/v1/reports/affiliates/{affiliateId}/clicks/total-counts/date-
     'uses'=>'AffiliateReferralClickController@getTotalClickPerUrlDateRangeV1'
 ]);
 
+$router->get('/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates/date-range/{startDate}/{endDate}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralReportController@getClickCountAcrossDatesByDateRangeV1'
+]);
+
 

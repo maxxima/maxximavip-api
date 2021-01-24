@@ -383,7 +383,7 @@ class AffiliateReferralReportController extends Controller{
 
         $viewCount = $this->affiliateReferralRepository->getClickCountAcrossDatesByDateRange($affiliateId, $startDate,$endDate);
         $data = [
-            "viewCount"=>$viewCount
+            "clickCount"=>$viewCount
         ];
         return response()->json($data);
     }
