@@ -99,4 +99,7 @@ $router->get('/api/v1/reports/affiliates/{affiliateId}/click-counts-across-dates
     'uses'=>'AffiliateReferralReportController@getClickCountAcrossDatesByDateRangeV1'
 ]);
 
-
+$router->get('/api/v1/affiliate-referrals/session-keys/{sessionKey}',[
+    'middleware'=>'apiKeyAuth',
+    'uses'=>'AffiliateReferralController@getReferralBySessionKeyV1'
+]);

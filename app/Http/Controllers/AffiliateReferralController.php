@@ -169,4 +169,51 @@ class AffiliateReferralController extends Controller
             ],HttpStatusCodes::NOT_FOUND);
         }
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/affiliate-referrals/session-keys/{sessionKey}",
+     *     summary="Confirm referral session",
+     *     tags={"affiliate-referrals"},
+     *     description="Confim referral session after successful purchase",
+     *     operationId="",
+     *     @OA\Parameter(
+     *         name="sessionKey",
+     *         in="path",
+     *         description="Session key identifier of referral to confirm",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *      security={
+     *         {"apiKeyAuth": {}}
+     *     },
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Affiliate referral with specified session key is not found"
+     *     ),
+     *     deprecated=false
+     * )
+     */
+    public function getReferralBySessionKeyV1(Request $request, string $sessionKey){
+        $affiliateReferral = AffiliateReferral::find($sessionKey);
+        if($affiliateReferral != null){
+            return [
+                "success"=>true,
+                "msg"=>"",
+                "data"=>[
+                    $affiliateReferral
+                ]
+            ];
+        }else{
+            return Response([
+
+            ],HttpStatusCodes::NOT_FOUND);
+        }
+    }
 }
