@@ -148,18 +148,24 @@ class AffiliateReferralController extends Controller
 
                 return [
                     "success"=>true,
-                    "msg"=>""
+                    "msg"=>"",
+                    "data"=>[
+                        "sessionKey"=>$sessionKey,
+                        "affiliateId"=>$affiliateReferral->affiliate_id
+                    ]
                 ];
             }else{
                 return Response([
                     "success"=>false,
-                    "msg"=>"Affiliate referral session is already confirmed"
+                    "msg"=>"Affiliate referral session is already confirmed",
+                    "data"=>null
                 ],HttpStatusCodes::GONE);
             }
         }else{
             return Response([
                 "success"=>false,
-                "msg"=>"Affiliate referral session not found"
+                "msg"=>"Affiliate referral session not found",
+                "data"=>null
             ],HttpStatusCodes::NOT_FOUND);
         }
     }
