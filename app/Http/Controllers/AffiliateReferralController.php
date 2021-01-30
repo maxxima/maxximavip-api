@@ -106,12 +106,12 @@ class AffiliateReferralController extends Controller
      *     path="/api/v1/affiliate-referrals/session-keys/{sessionKey}/conversion-confirmations",
      *     summary="Confirm referral session",
      *     tags={"affiliate-referrals"},
-     *     description="Confim referral session after successful purchase",
+     *     description="Confim conversion of referral session after successful purchase",
      *     operationId="",
      *     @OA\Parameter(
      *         name="sessionKey",
      *         in="path",
-     *         description="Session key identifier of referral to confirm",
+     *         description="Session key identifier of referral to confirm conversion",
      *         required=true,
      *         @OA\Schema(
      *           type="string",
@@ -175,12 +175,12 @@ class AffiliateReferralController extends Controller
      *     path="/api/v1/affiliate-referrals/session-keys/{sessionKey}",
      *     summary="Confirm referral session",
      *     tags={"affiliate-referrals"},
-     *     description="Confim referral session after successful purchase",
+     *     description="Get affiliate referral information",
      *     operationId="",
      *     @OA\Parameter(
      *         name="sessionKey",
      *         in="path",
-     *         description="Session key identifier of referral to confirm",
+     *         description="Session key",
      *         required=true,
      *         @OA\Schema(
      *           type="string",
