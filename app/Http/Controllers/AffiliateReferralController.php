@@ -72,7 +72,7 @@ class AffiliateReferralController extends Controller
         $location = null;
         switch($locationId){
             case ReferralLocationIdentifiers::ELIXXI:
-                $location = "https://stage.elixxi.com";
+                $location = "http://stage.elixxi.com";
                 break;
             default:
                 return Response()->json([
