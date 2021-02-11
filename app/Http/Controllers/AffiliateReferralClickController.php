@@ -23,7 +23,7 @@ class AffiliateReferralClickController
      *     path="/api/v1/affiliate-clicks/sessions/{sessionKey}",
      *     summary="Create a new affiliate referral click",
      *     tags={"affiliate-referral-clicks"},
-     *     description="Create a new affiliate referral click. Referral click is throttled at one url per session. Url can only be of these values: #home|#key-benefits|#buy-now|#contacts",
+     *     description="Create a new affiliate referral click. Referral click is throttled at one url per session. Url can only be of these values: #home|#key-benefits|#buy-now|#contacts|Facial Lipo Mask|Beauty Drink",
      *     operationId="",
      * @OA\RequestBody(
      *    request="AffiliateReferralRequestBody",
