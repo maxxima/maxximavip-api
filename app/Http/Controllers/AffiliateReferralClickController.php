@@ -77,7 +77,9 @@ class AffiliateReferralClickController
             '#home',
             '#key-benefits',
             '#buy-now',
-            '#contacts'
+            '#contacts',
+            'Facial Lipo Mask',
+            'Beauty Drink'
         ];
 
         if(in_array($url,$allowedUrls)){
