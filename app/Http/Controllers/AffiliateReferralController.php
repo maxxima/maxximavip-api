@@ -53,6 +53,15 @@ class AffiliateReferralController extends Controller
      *           type="integer",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="originIpAddress",
+     *         in="query",
+     *         description="Origin IP Address",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Referral session successfully created"
@@ -82,9 +91,13 @@ class AffiliateReferralController extends Controller
         $response = $this->maxxApiService->verifyMember($affiliateId);
         $responseData = json_decode($response);
         if($response->status() == 200 && $responseData->msg=="OK"){
+            $originIpAddress = $request->query("originIpAddress");
+            if($originIpAddress == null){
+                $originIpAddress = $request->ip();
+            }
             $affiliateReferral = $this->affiliateReferralRepository->createReferral($affiliateId,
                 $locationId,
-                $request->query("source"), $request->ip());
+                $request->query("source"), $originIpAddress);
             $sessionKey = $affiliateReferral->session_key;
             $response = [
               "sessionKey"=>$sessionKey,
