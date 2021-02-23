@@ -54,6 +54,15 @@ class AffiliateReferralController extends Controller
      *         )
      *     ),
      *     @OA\Parameter(
+     *         name="is_staging",
+     *         in="query",
+     *         description="Is Staging",
+     *         required=false,
+     *         @OA\Schema(
+     *           type="boolean",
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="originIpAddress",
      *         in="query",
      *         description="Origin IP Address",
@@ -79,9 +88,14 @@ class AffiliateReferralController extends Controller
      */
     public function createAffiliateReferralV1(Request $request, string $affiliateId, int $locationId){
         $location = null;
+        $isStaging = $request->query("is_staging");
         switch($locationId){
             case ReferralLocationIdentifiers::ELIXXI:
-                $location = "https://elixxi.com";
+                if($isStaging != 'true'){
+                    $location = "https://elixxi.com";
+                }else{
+                    $location = 'https://stage.elixxi.com';
+                }
                 break;
             default:
                 return Response()->json([
