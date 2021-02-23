@@ -94,7 +94,7 @@ class AffiliateReferralController extends Controller
                 if($isStaging != 'true'){
                     $location = "https://elixxi.com";
                 }else{
-                    $location = 'https://stage.elixxi.com';
+                    $location = 'http://stage.elixxi.com';
                 }
                 break;
             default:
