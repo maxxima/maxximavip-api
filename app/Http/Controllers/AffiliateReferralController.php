@@ -92,7 +92,8 @@ class AffiliateReferralController extends Controller
         switch($locationId){
             case ReferralLocationIdentifiers::ELIXXI:
                 if($isStaging != 'true'){
-                    $location = "https://elixxi.com";
+                    //$location = "https://elixxi.com";
+                    $location = "https://elixxi.com/laman-utama";
                 }else{
                     $location = 'http://stage.elixxi.com';
                 }
